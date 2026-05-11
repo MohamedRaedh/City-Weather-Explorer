@@ -27,8 +27,9 @@
 *,::before,::after{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);}
 
-/*ANIMATED WEATHER BACKGROUND*/
-
+/* ════════════════════════════════
+   ANIMATED WEATHER BACKGROUND
+════════════════════════════════ */
 #wx-bg{
   position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
   transition:background 1.5s ease;
@@ -84,7 +85,7 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 }
 @keyframes thunderFlash{0%,92%,96%,100%{opacity:0;}93%,95%{opacity:1;}}
 
-/*SPLASH*/
+/* ── SPLASH ── */
 #splash{position:fixed;inset:0;z-index:99999;background:#050b18;display:flex;flex-direction:column;align-items:center;justify-content:center;animation:splashOut .7s ease 3.4s forwards;}
 #splash::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,255,.04) 1px,transparent 1px);background-size:48px 48px;animation:gridP 3s ease infinite;}
 @keyframes gridP{0%,100%{opacity:.4;}50%{opacity:1;}}
@@ -100,7 +101,7 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 @keyframes loadB{0%{width:0%;}60%{width:75%;}100%{width:100%;}}
 @keyframes splashOut{0%{opacity:1;pointer-events:all;}100%{opacity:0;pointer-events:none;visibility:hidden;}}
 
-/*HEADER*/
+/* ── HEADER ── */
 .header{
   position:relative;z-index:1000;
   display:flex;align-items:center;gap:14px;padding:0 18px;
@@ -124,7 +125,7 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 .s-btn{padding:0 18px;height:40px;background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .2s;white-space:nowrap;letter-spacing:.5px;flex-shrink:0;border-radius:0 10px 10px 0;}
 .s-btn:hover{opacity:.85;}
 
-/*SEARCH SUGGESTIONS DROPDOWN*/
+/* ── SEARCH SUGGESTIONS DROPDOWN ── */
 .suggestions{
   position:absolute;top:calc(100% + 6px);left:0;right:0;
   background:rgba(13,21,38,.98);border:1px solid var(--border2);
@@ -158,10 +159,10 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 .fullext-btn{padding:0 14px;height:40px;background:var(--surface2);border:1.5px solid var(--border2);border-radius:8px;color:var(--accent);cursor:pointer;transition:all .2s;flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:5px;font-family:'DM Mono',monospace;font-size:11px;white-space:nowrap;}
 .fullext-btn:hover{background:var(--accent2);border-color:var(--accent2);color:#fff;box-shadow:0 0 12px var(--glow);}
 
-/*BODY*/
+/* ── BODY ── */
 .body{position:relative;z-index:1;display:flex;height:calc(100vh - var(--header-h));overflow:hidden;}
 
-/*MAP*/
+/* ── MAP ── */
 .map-wrap{flex:1;position:relative;height:100%;}
 #map{width:100%;height:100%;background:#050b18;}
 .leaflet-container{background:#050b18;font-family:'DM Mono',monospace;}
@@ -187,7 +188,7 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 .mk-bubble:hover{transform:scale(1.08);}
 .mk-pin{width:4px;height:14px;border-radius:2px;}
 
-/*SIDEBAR*/
+/* ── SIDEBAR ── */
 .sidebar{width:400px;flex-shrink:0;background:var(--surface);border-left:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column;}
 .sidebar::-webkit-scrollbar{width:4px;}
 .sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
@@ -199,7 +200,7 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 .empty-steps{margin-top:8px;display:flex;flex-direction:column;gap:8px;text-align:left;width:100%;}
 .step{padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;}
 
-/*DASHBOARD*/
+/* ── DASHBOARD ── */
 .dash{display:none;flex-direction:column;}
 .hero{padding:16px 20px 14px;position:relative;overflow:hidden;transition:background 1s ease;}
 .hero-top{display:flex;justify-content:space-between;align-items:flex-start;}
@@ -260,7 +261,7 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 .raw-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);max-height:160px;overflow-y:auto;display:none;white-space:pre-wrap;word-break:break-all;line-height:1.6;}
 .raw-box.open{display:block;}
 
-/*LOADER*/
+/* ── LOADER ── */
 .loader{display:none;position:fixed;inset:0;background:rgba(5,11,24,.8);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;}
 .loader.show{display:flex;}
 .loader-box{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:32px 44px;display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:var(--shadow-lg);}
@@ -268,95 +269,163 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 @keyframes spin{to{transform:rotate(360deg);}}
 .loader-txt{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;}
 
-/*TOAST*/
+/* ── TOAST ── */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);padding:12px 22px;border-radius:10px;font-size:13px;font-weight:500;z-index:99999;pointer-events:none;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:var(--shadow-lg);}
 .toast.show{transform:translateX(-50%) translateY(0);}
 .toast.error{background:#2d0d0d;color:#ff6b6b;border:1px solid #5c1a1a;}
 .toast.warn{background:#2d1e0d;color:#fbbf24;border:1px solid #5c3d1a;}
 .toast.ok{background:#0d2d18;color:#34d399;border:1px solid #1a5c35;}
 
-/*MOBILE SIDEBAR TOGGLE BUTTON*/
+/* ════════════════════════════════
+   MOBILE FAB — hidden on desktop
+════════════════════════════════ */
 .mob-toggle{
   display:none;
-  position:fixed;bottom:20px;right:20px;z-index:2000;
-  width:52px;height:52px;border-radius:50%;
+  position:fixed;bottom:22px;right:18px;z-index:2000;
+  width:54px;height:54px;border-radius:50%;
   background:linear-gradient(135deg,var(--accent2),var(--accent));
-  border:none;cursor:pointer;font-size:22px;
-  box-shadow:0 4px 20px rgba(0,194,255,.4);
+  border:none;cursor:pointer;font-size:24px;
+  box-shadow:0 4px 24px rgba(0,194,255,.5);
   align-items:center;justify-content:center;
-  transition:transform .2s;
+  transition:transform .2s,background .3s;
 }
-.mob-toggle:hover{transform:scale(1.1);}
-.mob-toggle:active{transform:scale(.95);}
+.mob-toggle:active{transform:scale(.92);}
+.mob-toggle.panel-open{
+  background:linear-gradient(135deg,#991b1b,#dc2626);
+  box-shadow:0 4px 20px rgba(220,38,38,.45);
+}
 
-/*RESPONSIVE MOBILE LAYOUT*/
+/* Peek strip — only shown on mobile */
+.mob-peek{display:none;}
+
+/* ════════════════════════════════
+   RESPONSIVE MOBILE LAYOUT
+════════════════════════════════ */
 @media(max-width:768px){
-  :root{--header-h:56px;}
+  :root{--header-h:54px;}
 
-  /* Header: compact single row */
-  .header{padding:0 12px;gap:8px;}
-  .brand-title{font-size:11px;letter-spacing:.5px;}
+  /* ── Header: tight single row ── */
+  .header{padding:0 10px;gap:8px;overflow:visible;}
+  .brand-icon{width:30px;height:30px;font-size:15px;border-radius:8px;}
+  .brand-title{font-size:11px;letter-spacing:.3px;}
   .brand-sub{display:none;}
-  .brand-icon{width:30px;height:30px;font-size:15px;}
+  .hist-row{display:none;}
+  .fullext-btn{padding:0 10px;}
   .fullext-btn span{display:none;}
-  .fullext-btn{padding:0 10px;font-size:16px;}
-  .s-btn{padding:0 12px;font-size:12px;}
+  .s-btn{padding:0 13px;font-size:12px;}
+  .s-input{font-size:13px;}
+  .suggestions{left:0;right:0;}
 
-  /* Body: map fills screen, sidebar slides up */
-  .body{flex-direction:column;position:relative;}
+  /* ── Body: map fills full screen ── */
+  .body{flex-direction:column;position:relative;overflow:hidden;}
+  .map-wrap{position:absolute;inset:0;height:100% !important;z-index:1;}
 
-  /* Map takes full height */
-  .map-wrap{flex:1;height:100%;min-height:0;}
+  /* ── Legend: compact, top-right, smaller ── */
+  .legend{
+    bottom:auto;top:14px;
+    left:auto;right:14px;
+    padding:6px 9px;
+    font-size:9px;
+  }
+  .legend-title{font-size:8px;margin-bottom:4px;letter-spacing:1px;}
+  .map-style-btn{padding:2px 7px;font-size:8px;}
+  .leg-item{font-size:9px;margin-bottom:2px;gap:5px;}
+  .dot{width:6px;height:6px;}
+  .style-row{gap:4px;}
 
-  /* Sidebar: bottom sheet style */
+  /* ── Bottom sheet sidebar ── */
   .sidebar{
-    position:fixed;bottom:0;left:0;right:0;
-    width:100%;height:70vh;
-    border-left:none;border-top:2px solid var(--border2);
+    position:fixed;
+    bottom:0;left:0;right:0;
+    width:100%;height:75vh;
+    border-left:none;
+    border-top:1.5px solid var(--border2);
     border-radius:20px 20px 0 0;
-    transform:translateY(100%);
-    transition:transform .35s cubic-bezier(.4,0,.2,1);
-    z-index:1500;
-    background:var(--surface);
-    box-shadow:0 -8px 40px rgba(0,0,0,.6);
+    background:rgba(13,21,38,.98);
+    backdrop-filter:blur(20px);
+    box-shadow:0 -10px 50px rgba(0,0,0,.75);
+    z-index:1400;
+    overflow:hidden;
+    /* Default: peeking (only handle + peek strip visible ~68px) */
+    transform:translateY(calc(100% - 68px));
+    transition:transform .38s cubic-bezier(.32,.72,0,1);
   }
   .sidebar.mob-open{transform:translateY(0);}
 
   /* Drag handle */
   .sidebar::before{
     content:'';display:block;
-    width:40px;height:4px;border-radius:2px;
+    width:36px;height:4px;border-radius:2px;
     background:var(--border2);
-    margin:10px auto 4px;flex-shrink:0;
+    margin:10px auto 0;
+    flex-shrink:0;
   }
 
-  /* Show FAB toggle button */
+  /* Peek strip: city + temp shown even when collapsed */
+  .mob-peek{
+    display:flex;align-items:center;
+    padding:8px 18px 6px;
+    cursor:pointer;
+    gap:8px;
+  }
+  .mob-peek-city{
+    font-family:'Orbitron',sans-serif;font-size:12px;
+    color:var(--text);font-weight:700;flex:1;
+  }
+  .mob-peek-temp{
+    font-family:'DM Mono',monospace;font-size:13px;
+    color:var(--accent);font-weight:500;
+  }
+  .mob-peek-caret{
+    font-size:11px;color:var(--muted);
+    transition:transform .35s;
+  }
+  .sidebar.mob-open .mob-peek-caret{transform:rotate(180deg);}
+
+  /* Scrollable inner content */
+  .sidebar .empty,
+  .sidebar .dash{
+    overflow-y:auto;
+    max-height:calc(75vh - 68px);
+  }
+
+  /* ── Show FAB ── */
   .mob-toggle{display:flex;}
 
-  /* Splash */
-  .sp-title{font-size:28px;}
-  .sp-globe{font-size:72px;}
+  /* ── Compact hero ── */
+  .hero{padding:10px 14px 10px;}
+  .h-temp{font-size:44px;}
+  .h-emoji{font-size:38px;}
+  .h-city{font-size:16px;}
+  .h-badge{font-size:10px;padding:3px 9px;}
 
-  /* Legend — move to top-right on mobile */
-  .legend{bottom:auto;top:16px;left:auto;right:16px;}
+  /* ── Grid cards ── */
+  .card{padding:10px 8px;}
+  .c-val{font-size:12px;}
+  .c-lbl{font-size:9px;}
 
-  /* Search suggestions full width */
-  .suggestions{left:-12px;right:-12px;}
+  /* ── Forecast tabs: horizontal scroll ── */
+  .forecast-tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;}
+  .forecast-tabs::-webkit-scrollbar{display:none;}
+  .ftab{font-size:9px;padding:4px 9px;white-space:nowrap;flex-shrink:0;}
 
-  /* Forecast tabs wrap nicely */
-  .forecast-tabs{flex-wrap:wrap;}
-  .ftab{font-size:9px;padding:3px 8px;}
+  /* ── Chart ── */
+  .chart-wrap{height:130px;}
+
+  /* ── Splash ── */
+  .sp-title{font-size:26px;}
+  .sp-globe{font-size:68px;}
 }
 
 @media(max-width:400px){
-  .brand-title{display:none;}
-  .hist-row{display:none;}
+  .brand-title{font-size:10px;}
+  .s-btn{padding:0 10px;}
 }
 </style>
 </head>
 <body>
 
-<!--ANIMATED WEATHER BACKGROUND-->
+<!-- ══ ANIMATED WEATHER BACKGROUND ══ -->
 <div id="wx-bg">
   <div class="stars" id="starsLayer"></div>
   <div class="sun" id="wxSun"></div>
@@ -431,6 +500,12 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
+    <!-- Mobile peek strip: always visible when peeking -->
+    <div class="mob-peek" id="mobPeek" onclick="toggleMobileSidebar()">
+      <span class="mob-peek-city" id="mobPeekCity">Tap to see weather</span>
+      <span class="mob-peek-temp" id="mobPeekTemp"></span>
+      <span class="mob-peek-caret">▲</span>
+    </div>
     <div class="empty" id="emptyState">
       <div class="empty-globe">🌍</div>
       <h3>NO CITY SELECTED</h3>
@@ -523,13 +598,15 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
 <script>
 const API_KEY = '38eee32788cbe019ade5c13ae12af828';
 
-/*Splash status*/
+/* ── Splash status ── */
 const statuses=['Initializing OpenStreetMap…','Loading Leaflet tiles…','Connecting to OpenWeather…','Ready to explore 🌍'];
 let si=0;
 const sEl=document.getElementById('spStatus');
 const sT=setInterval(()=>{si++;if(si<statuses.length)sEl.textContent=statuses[si];else clearInterval(sT);},750);
 
-/*ANIMATED WEATHER BACKGROUND*/
+/* ════════════════════════════════════════
+   ANIMATED WEATHER BACKGROUND
+════════════════════════════════════════ */
 function initStars(){
   const layer=document.getElementById('starsLayer');
   for(let i=0;i<120;i++){
@@ -641,7 +718,9 @@ function applyWeatherTheme(main){
   document.getElementById('mobToggle').textContent=EMOJI[main]||'🌡️';
 }
 
-/*LEAFLET MAP*/
+/* ════════════════════════════════════════
+   LEAFLET MAP
+════════════════════════════════════════ */
 const TILE_LAYERS={
   osm:{url:'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:19},
   dark:{url:'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',attribution:'© OpenStreetMap © CARTO',maxZoom:19,subdomains:'abcd'},
@@ -682,7 +761,9 @@ function placeMarker(lat,lon,temp,cityName){
   map.flyTo([lat,lon],Math.max(map.getZoom(),9),{duration:1.4});
 }
 
-/*SEARCH SUGGESTIONS (OpenWeatherMap Geo API)*/
+/* ════════════════════════════════════════
+   SEARCH SUGGESTIONS (OpenWeatherMap Geo API)
+════════════════════════════════════════ */
 let suggestTimer=null;
 let suggestActive=-1;
 let suggestItems=[];
@@ -763,7 +844,9 @@ document.addEventListener('click',e=>{
   if(!document.getElementById('searchBox').contains(e.target)) hideSuggestions();
 });
 
-/*CHART.JS*/
+/* ════════════════════════════════════════
+   CHART.JS
+════════════════════════════════════════ */
 let forecastChart=null,forecastData=null,currentChartType='temp';
 
 function buildChartDatasets(type){
@@ -808,7 +891,9 @@ function switchChart(type,btn){
   renderChart(type);
 }
 
-/*5-DAY DAILY FORECAST*/
+/* ════════════════════════════════════════
+   5-DAY DAILY FORECAST
+════════════════════════════════════════ */
 function renderDailyForecast(list){
   const days={};
   list.forEach(item=>{
@@ -843,7 +928,9 @@ function renderDailyForecast(list){
   });
 }
 
-/*API CALLS*/
+/* ════════════════════════════════════════
+   API CALLS
+════════════════════════════════════════ */
 function searchCity(){
   const city=document.getElementById('cityInput').value.trim();
   if(!city){toast('Please type a city name.','warn');return;}
@@ -890,7 +977,9 @@ async function fetchByCoords(lat,lon,nameHint){
   finally{showLoader(false);}
 }
 
-/*RENDER DASHBOARD*/
+/* ════════════════════════════════════════
+   RENDER DASHBOARD
+════════════════════════════════════════ */
 function renderDashboard(d,fList){
   lastWeather=d;
   forecastData=fList;
@@ -926,32 +1015,51 @@ function renderDashboard(d,fList){
   set('coCountry',d.sys.country);
   document.getElementById('rawBox').textContent=JSON.stringify(d,null,2);
   if(fList.length>0){renderChart(currentChartType);renderDailyForecast(fList);}
+
+  // Update mobile peek strip + FAB
+  if(window.innerWidth<=768){
+    const pc=document.getElementById('mobPeekCity');
+    const pt=document.getElementById('mobPeekTemp');
+    if(pc) pc.textContent=d.name+', '+d.sys.country;
+    if(pt) pt.textContent=Math.round(temp)+'°C';
+    const fab=document.getElementById('mobToggle');
+    if(fab&&!mobOpen) fab.textContent=EMOJI[wxMain]||'🌡️';
+    openMobileSidebar();
+  }
 }
 
-/*MOBILE SIDEBAR*/
+/* ════════════════════════════════════════
+   MOBILE SIDEBAR
+════════════════════════════════════════ */
 let mobOpen=false;
 function openMobileSidebar(){
   mobOpen=true;
   document.getElementById('sidebar').classList.add('mob-open');
-  document.getElementById('mobToggle').style.transform='scale(1.1)';
+  const fab=document.getElementById('mobToggle');
+  fab.classList.add('panel-open');
+  fab.textContent='✕';
 }
 function closeMobileSidebar(){
   mobOpen=false;
   document.getElementById('sidebar').classList.remove('mob-open');
-  document.getElementById('mobToggle').style.transform='';
+  const fab=document.getElementById('mobToggle');
+  fab.classList.remove('panel-open');
+  fab.textContent=lastWeather?(EMOJI[lastWeather.weather[0].main]||'🌡️'):'☁️';
 }
 function toggleMobileSidebar(){
   if(mobOpen) closeMobileSidebar(); else openMobileSidebar();
 }
 
-// Swipe down to close sidebar on mobile
+// Swipe up/down to open/close sidebar on mobile
 let touchStartY=0;
 document.getElementById('sidebar').addEventListener('touchstart',e=>{touchStartY=e.touches[0].clientY;},{passive:true});
 document.getElementById('sidebar').addEventListener('touchend',e=>{
-  if(e.changedTouches[0].clientY-touchStartY>60) closeMobileSidebar();
+  const dy=e.changedTouches[0].clientY-touchStartY;
+  if(dy>55) closeMobileSidebar();
+  else if(dy<-55) openMobileSidebar();
 },{passive:true});
 
-/*City history*/
+/* ── City history ── */
 let hist=[];
 function addHistory(city){
   hist=hist.filter(c=>c.toLowerCase()!==city.toLowerCase());
@@ -967,7 +1075,7 @@ function addHistory(city){
   });
 }
 
-/*Helpers*/
+/* ── Helpers ── */
 function tempStyle(t){
   if(t< 0) return{color:'#3b82f6',label:'❄️ Freezing',bg:'linear-gradient(135deg,#0a1628,#1d4ed8)'};
   if(t<10) return{color:'#60a5fa',label:'🥶 Cold',    bg:'linear-gradient(135deg,#0a1628,#2563eb)'};
