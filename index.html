@@ -38,7 +38,10 @@
 
 *,::before,::after { margin:0; padding:0; box-sizing:border-box; }
 html, body {
-  height: 100%; background: var(--bg);
+  height: 100%;
+  /* ── FIX: use dvh so mobile browser chrome is excluded ── */
+  min-height: 100dvh;
+  background: var(--bg);
   color: var(--text); font-family: 'DM Sans', sans-serif;
   overflow: hidden;
 }
@@ -200,7 +203,13 @@ html, body {
 /* ═══════════════════════════════════════
    DESKTOP BODY
 ═══════════════════════════════════════ */
-.body { position:relative; z-index:1; display:flex; height:calc(100vh - var(--header-h)); overflow:hidden; }
+.body {
+  position:relative; z-index:1;
+  display:flex;
+  /* ── FIX: use dvh to exclude mobile browser chrome bar ── */
+  height: calc(100dvh - var(--header-h));
+  overflow:hidden;
+}
 .map-wrap { flex:1; position:relative; height:100%; }
 #map { width:100%; height:100%; background:var(--bg); }
 .leaflet-container { background:var(--bg); font-family:'DM Mono',monospace; }
@@ -360,6 +369,12 @@ html, body {
 .ftab { padding:4px 10px; background:var(--glass); border:1px solid var(--glass-bd); border-radius:20px; font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); cursor:pointer; transition:all .15s; }
 .ftab:hover, .ftab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
 
+/* ── DESKTOP: Hide all mobile-only elements ── */
+.mob-handle { display: none; }
+.handle-pill { display: none; }
+.mob-peek-card { display: none !important; }
+.peek-hint { display: none !important; }
+
 /* ═══════════════════════════════════════
    LOADER & TOAST
 ═══════════════════════════════════════ */
@@ -375,319 +390,270 @@ html, body {
 .toast.warn  { background:rgba(45,30,13,.95); color:#fbbf24; border:1px solid rgba(251,191,36,.4); }
 .toast.ok    { background:rgba(13,45,24,.95); color:#34d399; border:1px solid rgba(52,211,153,.4); }
 
-/* ════════════════════════════════════════════
-   HIDE MOBILE-ONLY ELEMENTS ON DESKTOP
-════════════════════════════════════════════ */
-.mob-handle    { display: none; }
-.handle-pill   { display: none; }
-.mob-peek-card { display: none !important; }
-.peek-hint     { display: none !important; }
-
-/* ════════════════════════════════════════════
-   TABLET LAYOUT  (769px – 1024px)
-   Map left ~55% | Sidebar right ~45%
-   Header single row, compact
-════════════════════════════════════════════ */
-@media (min-width: 769px) and (max-width: 1024px) {
-  :root { --header-h: 56px; }
-
-  /* Header compact */
-  .header { padding: 0 14px; gap: 10px; }
-  .brand-sub { display: none; }
-  .brand-icon { width: 32px; height: 32px; font-size: 15px; }
-  .brand-title { font-size: 11px; }
-  .search-box { height: 36px; }
-  .s-btn { padding: 0 14px; font-size: 12px; height: 36px; }
-  .fullext-btn { padding: 0 12px; height: 36px; font-size: 11px; }
-  .fullext-btn span { display: none; }
-  .hist-row { display: none; }
-
-  /* Body: side-by-side */
-  .body { flex-direction: row; height: calc(100vh - var(--header-h)); }
-
-  /* Map takes 55% */
-  .map-wrap { flex: 0 0 55%; }
-
-  /* Sidebar takes 45%, always visible, scrollable */
-  .sidebar {
-    width: 45%;
-    flex-shrink: 0;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid var(--glass-bd);
-    background: rgba(8,12,26,.97);
-  }
-
-  /* Legend smaller */
-  .legend { bottom: 20px; left: 12px; padding: 6px 10px; border-radius: 12px; }
-  .legend-title { font-size: 8px; margin-bottom: 4px; }
-  .leg-item { font-size: 9px; margin-bottom: 2px; }
-  .dot { width: 6px; height: 6px; }
-  .map-style-btn { font-size: 8px; padding: 2px 7px; }
-
-  /* Hero card */
-  .hero { margin: 10px 10px 0; border-radius: 18px; padding: 14px 14px 12px; }
-  .h-city { font-size: 17px; }
-  .h-emoji { font-size: 36px; }
-  .h-temp { font-size: 44px; letter-spacing: -3px; }
-  .h-unit { font-size: 16px; }
-  .h-badge { font-size: 9px; padding: 3px 10px; }
-  .h-desc { font-size: 11px; }
-  .h-feels { font-size: 9px; }
-
-  /* Stats: 3 col */
-  .stats-wrap { grid-template-columns: 1fr 1fr 1fr; gap: 6px; padding: 8px 10px; }
-  .stat-card { border-radius: 14px; padding: 10px 8px; }
-  .c-ico { font-size: 14px; }
-  .c-lbl { font-size: 8px; }
-  .c-val { font-size: 12px; }
-
-  /* Glass cards */
-  .glass-card { margin: 0 10px 6px; border-radius: 16px; padding: 10px 12px; }
-  .sec-title { font-size: 8px; margin-bottom: 7px; }
-  .row { font-size: 11px; }
-  .rv { font-size: 10px; }
-
-  /* Chart */
-  .chart-wrap { height: 120px; }
-  .ftab { font-size: 8px; padding: 3px 7px; }
-  .ftabs { gap: 3px; margin-bottom: 8px; }
-
-  /* Daily */
-  .daily-row { padding: 6px 8px; border-radius: 10px; gap: 5px; }
-  .d-day { font-size: 10px; width: 30px; }
-  .d-ico { font-size: 14px; width: 20px; }
-  .d-desc { font-size: 9px; }
-  .d-temps { font-size: 10px; }
-  .d-pop { font-size: 9px; width: 28px; }
-  .d-bar-wrap { width: 36px; height: 3px; }
-
-  /* Coords */
-  .coords-row { padding: 0 10px 6px; gap: 5px; }
-  .co-card { border-radius: 12px; padding: 8px 10px; }
-  .co-lbl { font-size: 8px; }
-  .co-val { font-size: 11px; }
-
-  /* Raw */
-  .raw-box { font-size: 9px; max-height: 110px; }
-
-  /* Empty state */
-  .empty { padding: 24px 20px; gap: 8px; }
-  .empty-globe { font-size: 46px; }
-  .empty h3 { font-size: 13px; }
-  .empty p { font-size: 11px; }
-  .step { font-size: 11px; padding: 8px 12px; border-radius: 10px; }
-}
-
-/* ════════════════════════════════════════════
-   MOBILE LAYOUT  (≤ 768px)
-   Full-screen map + bottom sheet panel
-   Swipe up to expand, swipe down to collapse
-════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   ████  MOBILE LAYOUT  ████
+   KEY FIX: Use 100dvh / 100svh so the
+   layout fills the visible viewport
+   (excludes browser chrome / address bar)
+   and every layer is absolutely positioned
+   so nothing overflows or misaligns.
+═══════════════════════════════════════ */
 @media (max-width: 768px) {
-  :root { --header-h: 52px; }
-
-  /* ── Compact header ── */
-  .header { padding: 0 10px; gap: 7px; height: var(--header-h); }
-  .brand-icon { width: 30px; height: 30px; font-size: 14px; border-radius: 8px; }
-  .brand-title { font-size: 10px; letter-spacing: .3px; }
-  .brand-sub { display: none; }
-  .search-box { height: 32px; }
-  .s-btn { padding: 0 10px; font-size: 11px; height: 32px; border-radius: 0 50px 50px 0; }
-  .s-icon { margin: 0 8px; width: 13px; height: 13px; }
-  .fullext-btn { padding: 0 9px; height: 32px; font-size: 12px; }
-  .fullext-btn span { display: none; }
-  .hist-row { display: none; }
-  .suggestions { left: -10px; right: -10px; border-radius: 14px; font-size: 12px; }
-  .sug-item { padding: 8px 12px; font-size: 12px; }
-
-  /* ── Body: stacked, map fills screen ── */
-  .body {
-    flex-direction: column;
-    height: calc(100vh - var(--header-h));
-    position: relative;
-    overflow: hidden;
+  :root {
+    --header-h: 54px;
+    --nav-h: 64px;
   }
 
-  /* Map: full screen behind bottom sheet */
+  /* ── html/body: lock to physical visible area ── */
+  html, body {
+    width: 100%;
+    height: 100%;
+    /* dvh = dynamic viewport height (excludes browser chrome) */
+    min-height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    position: fixed;   /* prevents elastic scroll on iOS */
+  }
+
+  /* ── Compact header: full-width, pinned at top ── */
+  .header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    width: 100%;
+    padding: 0 12px;
+    gap: 8px;
+    height: var(--header-h);
+    background: rgba(8,12,26,.96);
+    z-index: 1000;
+    /* safe-area for notch devices */
+    padding-top: env(safe-area-inset-top, 0);
+  }
+  .brand-icon { width: 32px; height: 32px; font-size: 15px; border-radius: 9px; }
+  .brand-title { font-size: 10px; letter-spacing: .5px; }
+  .brand-sub { display: none; }
+  .search-box { height: 34px; }
+  .s-btn { padding: 0 12px; font-size: 11px; height: 34px; }
+  .s-icon { margin: 0 9px; }
+  .fullext-btn { padding: 0 10px; height: 34px; font-size: 13px; }
+  .fullext-btn span { display: none; }
+  .hist-row { display: none; }
+  /* Drop suggestions below the fixed header */
+  .suggestions {
+    position: fixed;
+    top: var(--header-h);
+    left: 8px; right: 8px;
+    border-radius: 14px;
+    z-index: 9999;
+  }
+
+  /* ── Body wrapper: sits below fixed header, fills rest of screen ── */
+  .body {
+    position: fixed;
+    top: var(--header-h);
+    left: 0; right: 0;
+    bottom: 0;
+    /* account for bottom safe area (home indicator on iPhone) */
+    bottom: env(safe-area-inset-bottom, 0);
+    width: 100%;
+    /* height = screen − header */
+    height: calc(100dvh - var(--header-h));
+    overflow: hidden;
+    display: block;   /* children are absolute, no flex needed */
+  }
+
+  /* ── Map: fills entire body area ── */
   .map-wrap {
     position: absolute;
     inset: 0;
-    height: 100%;
     width: 100%;
+    height: 100%;
     z-index: 1;
   }
   #map { width: 100%; height: 100%; }
 
-  /* Zoom controls: reposition above bottom sheet */
-  .leaflet-control-zoom { margin-bottom: 90px !important; }
-
-  /* Legend: tiny, top-right corner */
+  /* ── Legend: compact pill, top-right ── */
   .legend {
-    bottom: auto; top: 8px;
-    left: auto; right: 8px;
-    padding: 5px 8px; border-radius: 12px;
+    position: absolute;
+    bottom: auto; top: 10px;
+    left: auto; right: 10px;
+    padding: 6px 10px;
+    border-radius: 14px;
+    z-index: 500;
   }
-  .legend-title { font-size: 7px; margin-bottom: 3px; letter-spacing: 1px; }
-  .leg-item { font-size: 8px; margin-bottom: 2px; gap: 4px; }
+  .legend-title { font-size: 8px; margin-bottom: 4px; }
+  .leg-item { font-size: 9px; margin-bottom: 2px; gap: 5px; }
   .dot { width: 5px; height: 5px; }
-  .style-row { gap: 3px; margin-bottom: 5px; }
-  .map-style-btn { font-size: 7px; padding: 2px 5px; border-radius: 8px; }
+  .style-row { gap: 3px; }
+  .map-style-btn { font-size: 8px; padding: 2px 6px; }
 
-  /* ── SIDEBAR: bottom sheet ── */
+  /* ── SIDEBAR: bottom sheet, anchored to bottom of body ── */
   .sidebar {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     width: 100%;
-    height: 76px;           /* collapsed: handle + peek strip */
-    max-height: 90vh;
+    /* collapsed height: just handle + peek card (~80px) */
+    height: 80px;
+    /* expanded height: 86% of the body area (not full screen) */
+    max-height: calc(100dvh - var(--header-h) - 10px);
     border-left: none;
     border-top: 1px solid var(--glass-bd);
-    border-radius: 22px 22px 0 0;
-    background: rgba(8,12,26,0.92);
-    backdrop-filter: blur(32px);
-    -webkit-backdrop-filter: blur(32px);
-    box-shadow: 0 -8px 40px rgba(0,0,0,.65), 0 0 0 1px var(--glass-bd);
+    border-radius: 24px 24px 0 0;
+    background: rgba(8, 12, 26, 0.92);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    box-shadow: 0 -12px 50px rgba(0,0,0,.6), 0 0 0 1px var(--glass-bd);
     z-index: 500;
     overflow: hidden;
-    transition: height .38s cubic-bezier(.4,0,.2,1);
+    transition: height .4s cubic-bezier(.4,0,.2,1);
     display: flex;
     flex-direction: column;
   }
   .sidebar.mob-open {
-    height: 88vh;
+    /* expand to ~86% of the visible body area */
+    height: calc((100dvh - var(--header-h)) * 0.86);
     overflow-y: auto;
-    overflow-x: hidden;
   }
   .sidebar.mob-open::-webkit-scrollbar { width: 2px; }
-  .sidebar.mob-open::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 2px; }
+  .sidebar.mob-open::-webkit-scrollbar-thumb { background: var(--muted2); }
 
-  /* ── Drag handle ── */
+  /* ── Drag handle (re-enable on mobile) ── */
   .mob-handle {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 0 5px;
+    padding: 10px 0 6px;
     flex-shrink: 0;
     cursor: pointer;
     user-select: none;
-    -webkit-user-select: none;
   }
   .handle-pill {
     display: block;
-    width: 34px; height: 4px;
+    width: 36px; height: 4px;
     background: var(--glass-bd);
     border-radius: 2px;
     transition: background .2s, width .2s;
   }
-  .sidebar.mob-open .handle-pill { background: var(--accent); width: 42px; }
+  .sidebar.mob-open .handle-pill {
+    background: var(--accent);
+    width: 44px;
+  }
 
-  /* ── PEEK CARD (collapsed state) ── */
+  /* ── PEEK CARD (mobile collapsed state, after search) ── */
   .mob-peek-card {
     display: none;
-    margin: 0 12px 8px;
-    border-radius: 16px;
-    padding: 9px 14px;
+    margin: 4px 12px 8px;
+    border-radius: 18px;
+    padding: 10px 14px;
     flex-shrink: 0;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--glass-bd);
-    background: linear-gradient(135deg,rgba(124,92,252,.22),rgba(91,141,239,.14));
+    background: linear-gradient(135deg, rgba(124,92,252,0.25), rgba(91,141,239,0.15));
     backdrop-filter: blur(20px);
-    transition: transform .15s;
+    transition: transform .2s;
   }
   .mob-peek-card.visible { display: flex !important; flex-direction: column; }
-  .mob-peek-card:active { transform: scale(.97); }
+  .mob-peek-card:active { transform: scale(.98); }
   .mob-peek-card::before {
-    content:''; position:absolute; inset:0;
-    background: linear-gradient(135deg,rgba(255,255,255,.06),transparent);
-    border-radius: 16px;
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,.06), transparent);
+    border-radius: 18px;
   }
   .peek-inner { display: flex; align-items: center; gap: 10px; position: relative; }
-  .peek-emoji-big { font-size: 30px; flex-shrink: 0; }
+  .peek-emoji-big { font-size: 34px; flex-shrink: 0; }
   .peek-info { flex: 1; min-width: 0; }
-  .peek-city-name { font-size: 14px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .peek-condition { font-size: 10px; color: rgba(255,255,255,.55); font-family:'DM Mono',monospace; text-transform: capitalize; margin-top: 1px; }
-  .peek-temp-big { font-family:'Orbitron',sans-serif; font-size: 24px; font-weight: 900; color: #fff; line-height: 1; flex-shrink: 0; }
-  .peek-temp-unit { font-size: 11px; color: rgba(255,255,255,.45); }
-  .peek-hint { display: none; text-align: center; font-size: 8px; font-family:'DM Mono',monospace; color: var(--muted2); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; flex-shrink: 0; }
+  .peek-city-name { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .peek-condition { font-size: 10px; color: rgba(255,255,255,.6); font-family: 'DM Mono', monospace; text-transform: capitalize; margin-top: 1px; }
+  .peek-temp-big { font-family: 'Orbitron', sans-serif; font-size: 26px; font-weight: 900; color: #fff; line-height: 1; flex-shrink: 0; }
+  .peek-temp-unit { font-size: 12px; color: rgba(255,255,255,.5); }
+  /* Swipe hint */
+  .peek-hint { display: none; text-align: center; font-size: 9px; font-family: 'DM Mono', monospace; color: var(--muted2); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; flex-shrink: 0; }
   .peek-hint.visible { display: block !important; }
   .sidebar.mob-open .mob-peek-card { display: none !important; }
-  .sidebar.mob-open .peek-hint     { display: none !important; }
+  .sidebar.mob-open .peek-hint { display: none !important; }
 
-  /* ── Empty state ── */
-  .empty { padding: 16px 16px; gap: 6px; }
-  .empty-globe { font-size: 38px; }
+  /* ── Empty state (mobile) ── */
+  .empty { padding: 20px 20px; gap: 8px; }
+  .empty-globe { font-size: 44px; }
   .empty h3 { font-size: 12px; }
-  .empty p { font-size: 10px; line-height: 1.6; }
-  .empty-steps { gap: 5px; margin-top: 6px; }
-  .step { padding: 7px 11px; font-size: 10px; border-radius: 10px; }
+  .empty p { font-size: 11px; max-width: 200px; }
+  .empty-steps { gap: 5px; }
+  .step { padding: 8px 12px; font-size: 11px; border-radius: 10px; }
 
-  /* ── Dashboard cards ── */
-  .dash { padding-bottom: 20px; }
+  /* ── MOBILE DASHBOARD ── */
+  .dash { gap: 0; padding-bottom: 16px; }
 
-  /* Hero */
-  .hero { margin: 8px 10px 0; border-radius: 20px; padding: 14px 14px 12px; border: 1px solid rgba(255,255,255,.14); }
-  .h-city { font-size: 16px; }
-  .h-emoji { font-size: 34px; }
-  .h-temp { font-size: 44px; letter-spacing: -3px; }
-  .h-unit { font-size: 15px; }
-  .h-badge { font-size: 9px; padding: 3px 9px; }
+  .hero {
+    margin: 10px 12px 0;
+    border-radius: 22px;
+    padding: 16px 16px 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .h-city { font-size: 17px; }
+  .h-emoji { font-size: 38px; }
+  .h-temp { font-size: 48px; letter-spacing: -3px; }
+  .h-unit { font-size: 16px; }
+  .h-badge { font-size: 9px; padding: 3px 10px; }
   .h-desc { font-size: 11px; }
   .h-feels { font-size: 9px; }
 
-  /* Stats: 3 col */
-  .stats-wrap { grid-template-columns: 1fr 1fr 1fr; gap: 5px; padding: 7px 10px; }
-  .stat-card { border-radius: 14px; padding: 9px 7px; gap: 2px; }
-  .c-ico { font-size: 13px; }
-  .c-lbl { font-size: 7px; letter-spacing: .4px; }
-  .c-val { font-size: 11px; }
+  /* Stats grid: 3 glass pill cards */
+  .stats-wrap {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    padding: 8px 12px;
+  }
+  .stat-card {
+    border-radius: 16px;
+    padding: 10px 8px;
+    gap: 2px;
+  }
+  .c-ico { font-size: 14px; margin-bottom: 1px; }
+  .c-lbl { font-size: 8px; letter-spacing: .5px; }
+  .c-val { font-size: 12px; }
 
-  /* Glass cards */
-  .glass-card { margin: 0 10px 5px; border-radius: 16px; padding: 10px 12px; }
-  .sec-title { font-size: 8px; margin-bottom: 7px; }
-  .row { font-size: 11px; padding: 2px 0; }
+  /* Glass section cards */
+  .glass-card {
+    margin: 0 12px 6px;
+    border-radius: 18px;
+    padding: 12px 14px;
+  }
+  .sec-title { font-size: 8px; margin-bottom: 8px; }
+  .row { font-size: 11px; }
   .rv { font-size: 10px; }
 
-  /* Chart */
-  .chart-wrap { height: 100px; }
-  .ftabs { gap: 4px; margin-bottom: 7px; flex-wrap: wrap; }
-  .ftab { font-size: 8px; padding: 3px 7px; border-radius: 20px; }
+  /* Forecast chart: shorter */
+  .chart-wrap { height: 110px; }
+  .ftab { font-size: 8px; padding: 3px 8px; }
+  .ftabs { gap: 4px; }
 
-  /* Daily */
-  .daily-grid { gap: 4px; }
-  .daily-row { padding: 6px 8px; border-radius: 10px; gap: 5px; }
-  .d-day { font-size: 9px; width: 26px; }
-  .d-ico { font-size: 13px; width: 18px; }
+  /* Daily forecast: compact rows */
+  .daily-row { padding: 6px 8px; border-radius: 10px; gap: 6px; }
+  .d-day { font-size: 10px; width: 28px; }
+  .d-ico { font-size: 14px; width: 20px; }
   .d-desc { font-size: 9px; }
   .d-temps { font-size: 10px; }
-  .d-pop { font-size: 8px; width: 26px; }
-  .d-bar-wrap { width: 28px; height: 2px; }
+  .d-bar-wrap { width: 32px; height: 2px; }
 
-  /* Coords */
-  .coords-row { padding: 0 10px 5px; gap: 5px; }
-  .co-card { border-radius: 12px; padding: 7px 9px; }
-  .co-lbl { font-size: 7px; }
-  .co-val { font-size: 10px; }
+  /* Coords row */
+  .coords-row { padding: 0 12px 6px; gap: 5px; }
+  .co-card { border-radius: 14px; padding: 8px 10px; }
+  .co-lbl { font-size: 8px; }
+  .co-val { font-size: 11px; }
 
-  /* Raw */
-  .raw-box { font-size: 9px; max-height: 100px; }
-  .raw-toggle { font-size: 9px; padding: 2px 9px; }
+  /* Raw JSON */
+  .raw-box { font-size: 9px; max-height: 120px; }
+
+  /* Toast: account for bottom sheet being visible */
+  .toast { bottom: 90px; }
 }
 
-/* ════════════════════════════════════════════
-   SMALL PHONE  (≤ 400px)
-════════════════════════════════════════════ */
 @media (max-width: 400px) {
-  .brand-title { font-size: 9px; letter-spacing: 0; }
-  .s-btn { padding: 0 8px; font-size: 10px; }
-  .stats-wrap { grid-template-columns: 1fr 1fr 1fr; gap: 4px; padding: 6px 8px; }
-  .c-lbl { font-size: 7px; }
-  .c-val { font-size: 10px; }
-  .h-temp { font-size: 38px; }
-  .h-city { font-size: 14px; }
+  .brand-title { display: none; }
+  .s-btn { padding: 0 9px; font-size: 10px; }
+  .stats-wrap { grid-template-columns: 1fr 1fr; gap: 5px; }
 }
 </style>
 </head>
@@ -978,25 +944,17 @@ setTileLayer('osm',document.querySelector('.map-style-btn.active'));
 map.on('click',e=>fetchByCoords(e.latlng.lat,e.latlng.lng));
 map.getContainer().style.cursor='crosshair';
 function fullExtent(){
-  /* Fly back to world view */
   map.flyTo([20,10],2,{duration:1.4});
-  /* Remove active marker */
   if(activeMarker){activeMarker.remove();activeMarker=null;}
-  /* Reset sidebar to empty state */
   document.getElementById('dash').style.display='none';
   document.getElementById('emptyState').style.display='flex';
-  /* Clear search input */
   document.getElementById('cityInput').value='';
-  /* Reset weather background */
   makeClouds(5); stopRain(); stopSnow();
   document.getElementById('wxThunder').style.display='none';
   document.getElementById('wxSun') && (document.getElementById('wxSun').style.display='none');
-  /* Clear lastWx so peek card hides */
   lastWx=null;
-  /* Hide peek card on mobile */
   document.getElementById('mobPeekCard').classList.remove('visible');
   document.getElementById('peekHint').classList.remove('visible');
-  /* Close mobile sidebar if open */
   if(mobOpen) closeMobileSidebar();
   toast('🌐 Map reset to full extent','ok');
 }
@@ -1138,7 +1096,7 @@ async function fetchByCoords(lat,lon,hint){
     renderDash(w,f.list||[]);
     $('cityInput').value=hint||w.name; addHist(hint||w.name);
     toast(`✅ ${w.name}, ${w.sys.country}`,'ok');
-  if(window.innerWidth<=768) openMobileSidebar();
+    if(window.innerWidth<=768) openMobileSidebar();
   }catch(e){toast('❌ '+e.message,'error');}
   finally{showLoader(false);}
 }
@@ -1188,7 +1146,7 @@ function renderDash(d,fList){
   /* Chart & daily */
   if(fList.length>0){renderChart(chartType);renderDaily(fList);}
 
-  /* Update peek card — only on mobile (≤768px) */
+  /* Update peek card — only visible on mobile */
   set('peekCity',d.name);
   set('peekCond',d.weather[0].description);
   set('peekEmoji',EMOJI[wxMain]||'🌡️');
@@ -1214,7 +1172,8 @@ function closeMobileSidebar(){
     $('mobPeekCard').classList.add('visible');
     $('peekHint').classList.add('visible');
   }
-}function toggleMobileSidebar(){
+}
+function toggleMobileSidebar(){
   if(mobOpen) closeMobileSidebar(); else openMobileSidebar();
 }
 /* swipe down */
