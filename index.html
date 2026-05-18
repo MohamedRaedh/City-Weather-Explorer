@@ -10,9 +10,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-/* ═══════════════════════════════════════
-   ROOT VARIABLES
-═══════════════════════════════════════ */
+/* --ROOT VARIABLES-- */
 :root {
   --bg:       #080c1a;
   --bg2:      #0d1230;
@@ -43,9 +41,7 @@ html, body {
   overflow: hidden;
 }
 
-/* ═══════════════════════════════════════
-   ANIMATED BG BLOBS (like the image)
-═══════════════════════════════════════ */
+/* --ANIMATED BG BLOBS (like the image)-- */
 .bg-blob {
   position: fixed; border-radius: 50%;
   filter: blur(80px); pointer-events: none; z-index: 0;
@@ -74,13 +70,13 @@ html, body {
   66%  { transform: translate(-15px,15px) scale(.95); }
 }
 
-/* Stars */
+/* --Stars-- */
 #starsLayer { position:fixed; inset:0; z-index:0; pointer-events:none; }
 .star { position:absolute; border-radius:50%; background:#fff;
   animation: twinkle var(--dur,3s) ease-in-out infinite var(--del,0s); }
 @keyframes twinkle { 0%,100%{opacity:.1;} 50%{opacity:.7;} }
 
-/* Animated wx overlays */
+/* --Animated wx overlays-- */
 #wx-bg { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
 .wx-cloud { position:absolute; border-radius:50px; background:rgba(255,255,255,.04); animation:cloudDrift linear infinite; }
 @keyframes cloudDrift { from{transform:translateX(-200px);} to{transform:translateX(calc(100vw + 200px));} }
@@ -95,9 +91,7 @@ html, body {
 #wxThunder { position:absolute; inset:0; background:rgba(200,210,255,.06); animation:thunderFlash 5s ease infinite; display:none; }
 @keyframes thunderFlash { 0%,92%,96%,100%{opacity:0;} 93%,95%{opacity:1;} }
 
-/* ═══════════════════════════════════════
-   SPLASH
-═══════════════════════════════════════ */
+/* --SPLASH-- */
 #splash {
   position:fixed; inset:0; z-index:99999;
   background: var(--bg);
@@ -130,9 +124,7 @@ html, body {
 @keyframes loadB { 0%{width:0%;} 60%{width:70%;} 100%{width:100%;} }
 @keyframes splashOut { 0%{opacity:1;} 100%{opacity:0;pointer-events:none;visibility:hidden;} }
 
-/* ═══════════════════════════════════════
-   DESKTOP HEADER
-═══════════════════════════════════════ */
+/* --DESKTOP HEADER-- */
 .header {
   position:relative; z-index:1000;
   display:flex; align-items:center; gap:14px; padding:0 18px;
@@ -197,9 +189,7 @@ html, body {
 .fullext-btn { padding:0 14px; height:38px; background:var(--glass); border:1px solid var(--glass-bd); border-radius:50px; color:var(--accent); cursor:pointer; transition:all .2s; flex-shrink:0; display:flex; align-items:center; justify-content:center; gap:5px; font-family:'DM Mono',monospace; font-size:11px; white-space:nowrap; }
 .fullext-btn:hover { background:var(--accent); color:#fff; }
 
-/* ═══════════════════════════════════════
-   DESKTOP BODY
-═══════════════════════════════════════ */
+/* --DESKTOP BODY-- */
 .body { position:relative; z-index:1; display:flex; height:calc(100vh - var(--header-h)); overflow:hidden; }
 .map-wrap { flex:1; position:relative; height:100%; }
 #map { width:100%; height:100%; background:var(--bg); }
@@ -233,9 +223,7 @@ html, body {
 .mk-bubble:hover { transform:scale(1.08); }
 .mk-pin { width:3px; height:12px; border-radius:2px; }
 
-/* ═══════════════════════════════════════
-   DESKTOP SIDEBAR
-═══════════════════════════════════════ */
+/* --DESKTOP SIDEBAR-- */
 .sidebar {
   width:400px; flex-shrink:0;
   background:rgba(8,12,26,.95);
@@ -246,7 +234,7 @@ html, body {
 .sidebar::-webkit-scrollbar { width:3px; }
 .sidebar::-webkit-scrollbar-thumb { background:var(--muted2); border-radius:2px; }
 
-/* Empty state */
+/* --Empty State-- */
 .empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 28px; text-align:center; gap:12px; }
 .empty-globe { font-size:64px; animation:gPulse 2.5s ease infinite; }
 @keyframes gPulse { 0%,100%{filter:drop-shadow(0 0 16px var(--glow-p));transform:scale(1);} 50%{filter:drop-shadow(0 0 36px var(--glow-p));transform:scale(1.06);} }
@@ -255,12 +243,10 @@ html, body {
 .empty-steps { margin-top:8px; display:flex; flex-direction:column; gap:8px; text-align:left; width:100%; }
 .step { padding:10px 14px; background:var(--glass); border:1px solid var(--glass-bd); border-radius:12px; font-size:12px; color:var(--muted); font-family:'DM Mono',monospace; }
 
-/* ═══════════════════════════════════════
-   DESKTOP DASHBOARD CARDS
-═══════════════════════════════════════ */
+/* --DESKTOP DASHBOARD CARDS-- */
 .dash { display:none; flex-direction:column; gap:0; }
 
-/* HERO card */
+/* --HERO CARD-- */
 .hero {
   margin:14px 14px 0;
   border-radius:var(--card-r);
@@ -287,7 +273,7 @@ html, body {
 .h-desc { font-size:12px; color:rgba(255,255,255,.6); text-transform:capitalize; margin-top:6px; position:relative; }
 .h-feels { font-size:10px; color:rgba(255,255,255,.35); font-family:'DM Mono',monospace; margin-top:2px; position:relative; }
 
-/* Stats grid - glass cards */
+/* --Stats Grid - Glass Cards-- */
 .stats-wrap { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:10px 14px; }
 .stat-card {
   background:var(--glass);
@@ -303,7 +289,7 @@ html, body {
 .c-lbl { font-size:9px; color:var(--muted); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:.8px; }
 .c-val { font-size:13px; font-weight:700; color:var(--text); font-family:'DM Mono',monospace; }
 
-/* Section glass cards */
+/* --Section Glass Cards-- */
 .glass-card {
   margin:0 14px 8px;
   background:var(--glass);
@@ -317,10 +303,10 @@ html, body {
 .rk { color:var(--muted); }
 .rv { font-family:'DM Mono',monospace; font-size:11px; color:var(--text); }
 
-/* Forecast chart */
+/* --Forecast Chart-- */
 .chart-wrap { position:relative; height:140px; }
 
-/* Daily forecast */
+/* --Daily Forecast-- */
 .daily-grid { display:flex; flex-direction:column; gap:5px; }
 .daily-row {
   display:flex; align-items:center; gap:8px; padding:8px 10px;
@@ -339,7 +325,7 @@ html, body {
 .d-bar-wrap { width:44px; height:3px; background:var(--glass-bd); border-radius:2px; flex-shrink:0; overflow:hidden; }
 .d-bar { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--accent),var(--cyan)); }
 
-/* Coords */
+/* --Coords-- */
 .coords-row { display:flex; gap:8px; padding:0 14px 8px; }
 .co-card {
   flex:1; display:flex; flex-direction:column; gap:3px;
@@ -349,20 +335,18 @@ html, body {
 .co-lbl { font-size:9px; font-family:'DM Mono',monospace; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
 .co-val { font-size:12px; font-family:'DM Mono',monospace; color:var(--accent); font-weight:700; }
 
-/* Raw JSON */
+/* --Raw JSON-- */
 .raw-toggle { font-size:10px; padding:3px 10px; background:var(--glass); border:1px solid var(--glass-bd); border-radius:20px; cursor:pointer; color:var(--muted); transition:all .15s; font-family:'DM Mono',monospace; }
 .raw-toggle:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
 .raw-box { background:rgba(0,0,0,.3); border:1px solid var(--glass-bd); border-radius:10px; padding:10px 12px; font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); max-height:150px; overflow-y:auto; display:none; white-space:pre-wrap; word-break:break-all; line-height:1.6; margin-top:8px; }
 .raw-box.open { display:block; }
 
-/* Forecast tabs */
+/* --Forecast Tabs-- */
 .ftabs { display:flex; gap:5px; margin-bottom:10px; flex-wrap:wrap; }
 .ftab { padding:4px 10px; background:var(--glass); border:1px solid var(--glass-bd); border-radius:20px; font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); cursor:pointer; transition:all .15s; }
 .ftab:hover, .ftab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
 
-/* ═══════════════════════════════════════
-   LOADER & TOAST
-═══════════════════════════════════════ */
+/* --LOADER & TOAST-- */
 .loader { display:none; position:fixed; inset:0; background:rgba(8,12,26,.8); backdrop-filter:blur(8px); z-index:9999; align-items:center; justify-content:center; }
 .loader.show { display:flex; }
 .loader-box { background:rgba(13,18,48,.9); border:1px solid var(--glass-bd); border-radius:20px; padding:32px 44px; display:flex; flex-direction:column; align-items:center; gap:16px; box-shadow:0 20px 60px rgba(0,0,0,.8); backdrop-filter:blur(20px); }
@@ -375,25 +359,21 @@ html, body {
 .toast.warn  { background:rgba(45,30,13,.95); color:#fbbf24; border:1px solid rgba(251,191,36,.4); }
 .toast.ok    { background:rgba(13,45,24,.95); color:#34d399; border:1px solid rgba(52,211,153,.4); }
 
-/* ── DESKTOP: Hide all mobile-only elements ── */
+/* --DESKTOP: Hide All Mobile-Only Elements-- */
 .mob-handle { display: none; }
 .handle-pill { display: none; }
 .mob-peek-card { display: none !important; }
 .peek-hint { display: none !important; }
 
-/* ═══════════════════════════════════════════════════════════
-   RESPONSIVE ALIGNMENT — ONLY layout/position changes here.
+/* --RESPONSIVE ALIGNMENT — ONLY layout/position changes here.
    Nothing from the original code above is removed or altered.
-   Three breakpoints like Uber: tablet | mobile | small-phone
-═══════════════════════════════════════════════════════════ */
+   Three breakpoints like Uber: tablet | mobile | small-phone-- */
 
-/* ── TABLET  769px – 1100px ──────────────────────────────
-   Side-by-side layout: map fills left, sidebar 42% right.
-   No bottom sheet needed — sidebar is always visible.
-────────────────────────────────────────────────────────── */
+/* --TABLET  769px – 1100px ,Side-by-side layout: map fills left, sidebar 42% right.
+   No bottom sheet needed — sidebar is always visible-- */
 @media (min-width: 769px) and (max-width: 1100px) {
 
-  /* Body stays row — just shrink sidebar width */
+  /* --Body stays row — just shrink sidebar width-- */
   .body { flex-direction: row; }
 
   .sidebar {
@@ -402,7 +382,7 @@ html, body {
     max-width: 420px;
     border-left: 1px solid var(--glass-bd);
     overflow-y: auto;
-    /* Override any mobile transform */
+    /* --Override any mobile transform-- */
     position: relative;
     transform: none !important;
     height: 100%;
@@ -410,7 +390,7 @@ html, body {
     bottom: auto;
   }
 
-  /* Legend: stays bottom-left, just smaller padding */
+  /* --Legend: stays bottom-left, just smaller padding-- */
   .legend {
     bottom: 20px;
     left: 12px;
@@ -420,48 +400,46 @@ html, body {
     border-radius: 12px;
   }
 
-  /* Header: hide brand subtitle to save space */
+  /* --Header: hide brand subtitle to save space-- */
   .brand-sub { display: none; }
 
-  /* Hide history pills — not enough room */
+  /* --Hide history pills — not enough room-- */
   .hist-row { display: none; }
 
-  /* Full Extent: hide text label, keep icon */
+  /* --Full Extent: hide text label, keep icon-- */
   .fullext-btn span { display: none; }
   .fullext-btn { padding: 0 11px; }
 }
 
-/* ── MOBILE  ≤ 768px ─────────────────────────────────────
-   Full-screen map + bottom sheet panel.
-   Sidebar slides up from bottom like Uber's drawer.
-────────────────────────────────────────────────────────── */
+/* --MOBILE  ≤ 768px ,Full-screen map + bottom sheet panel.
+   Sidebar slides up from bottom like Uber's drawer-- */
 @media (max-width: 768px) {
 
-  /* ── Header: single tight row, nothing wraps ── */
+  /* --Header: single tight row, nothing wraps-- */
   .header {
     padding: 0 10px;
     gap: 6px;
     height: var(--header-h);
-    overflow: hidden; /* prevent any item pushing to next line */
+    overflow: hidden; 
   }
 
-  /* Brand: icon only, hide text on very small screens */
+  /* --Brand: icon only, hide text on very small screens-- */
   .brand-sub { display: none; }
 
-  /* Search box: shrinks to fill available space */
+  /* --Search box: shrinks to fill available space-- */
   .search-wrap { flex: 1; min-width: 0; overflow: hidden; }
 
-  /* Hide history pills — no room on mobile */
+  /* --Hide history pills — no room on mobile-- */
   .hist-row { display: none; }
 
-  /* Full Extent: icon only */
+  /* --Full Extent: icon only-- */
   .fullext-btn span { display: none; }
   .fullext-btn { padding: 0 10px; flex-shrink: 0; }
 
-  /* ── Splash: prevent title wrapping on narrow screens ── */
+  /* --Splash: prevent title wrapping on narrow screens-- */
   .sp-globe { font-size: 64px; }
   .sp-title {
-    /* Scale down just enough to fit in one area without wrapping */
+    /* --Scale down just enough to fit in one area without wrapping-- */
     font-size: clamp(16px, 5.5vw, 28px);
     letter-spacing: clamp(0px, 0.5vw, 2px);
     padding: 0 16px;
@@ -477,7 +455,7 @@ html, body {
   }
   .sp-bar-w { width: min(200px, 70vw); margin-top: 32px; }
 
-  /* ── Body: map fills the full screen behind sheet ── */
+  /* --Body: map fills the full screen behind sheet-- */
   .body {
     flex-direction: column;
     position: relative;
@@ -485,7 +463,7 @@ html, body {
     overflow: hidden;
   }
 
-  /* Map: absolute, fills entire body area */
+  /* --Map: absolute, fills entire body area-- */
   .map-wrap {
     position: absolute;
     inset: 0;
@@ -495,9 +473,9 @@ html, body {
   }
   #map { width: 100%; height: 100%; }
 
-  /* Legend: bottom-left, above sheet, compact */
+  /* --Legend: bottom-left, above sheet, compact-- */
   .legend {
-    bottom: 90px;   /* above the collapsed sheet */
+    bottom: 90px;   
     left: 10px;
     top: auto;
     right: auto;
@@ -506,21 +484,20 @@ html, body {
     z-index: 400;
   }
 
-  /* Zoom controls: Leaflet default top-left is fine,
-     but push them down slightly so they don't hit header */
+  /* --Zoom controls: Leaflet default top-left is fine,but push them down slightly so they don't hit header-- */
   .leaflet-top.leaflet-left {
     top: 10px !important;
     left: 10px !important;
   }
 
-  /* ── Sidebar: bottom sheet ── */
+  /* --Sidebar: bottom sheet-- */
   .sidebar {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: 70px;            /* collapsed: just the handle visible */
+    height: 70px;           
     max-height: 88vh;
     z-index: 500;
     border-left: none;
@@ -534,11 +511,10 @@ html, body {
     transition: height .38s cubic-bezier(.4, 0, .2, 1);
     display: flex;
     flex-direction: column;
-    /* Reset any desktop positioning */
     transform: none;
   }
 
-  /* Expanded sheet */
+  /* --Expanded sheet-- */
   .sidebar.mob-open {
     height: 86vh;
     overflow-y: auto;
@@ -547,7 +523,7 @@ html, body {
   .sidebar.mob-open::-webkit-scrollbar { width: 2px; }
   .sidebar.mob-open::-webkit-scrollbar-thumb { background: var(--muted2); }
 
-  /* ── Drag handle: re-enabled on mobile ── */
+  /* --Drag handle: re-enabled on mobile-- */
   .mob-handle {
     display: flex;
     flex-direction: column;
@@ -557,7 +533,6 @@ html, body {
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
-    /* Sticky so it stays visible while scrolling */
     position: sticky;
     top: 0;
     background: rgba(8,12,26,0.92);
@@ -577,7 +552,7 @@ html, body {
     width: 44px;
   }
 
-  /* ── Peek card: visible when sheet is collapsed ── */
+  /* --Peek card: visible when sheet is collapsed-- */
   .mob-peek-card {
     display: none;
     margin: 4px 12px 8px;
@@ -612,7 +587,7 @@ html, body {
   .sidebar.mob-open .mob-peek-card { display: none !important; }
   .sidebar.mob-open .peek-hint     { display: none !important; }
 
-  /* ── Dashboard inner layout tweaks for mobile ── */
+  /* --Dashboard inner layout tweaks for mobile-- */
   .hero          { margin: 8px 10px 0; border-radius: 20px; }
   .stats-wrap    { padding: 8px 10px; gap: 6px; }
   .glass-card    { margin: 0 10px 6px; border-radius: 16px; }
@@ -622,9 +597,7 @@ html, body {
   .empty-globe   { font-size: 44px; }
 }
 
-/* ── SMALL PHONE  ≤ 390px ────────────────────────────────
-   Extra tight: brand title hidden, search stays full width
-────────────────────────────────────────────────────────── */
+/* --SMALL PHONE  ≤ 390px, Extra tight: brand title hidden, search stays full width-- */
 @media (max-width: 390px) {
   .brand-title { display: none; }
   .brand-icon  { width: 30px; height: 30px; font-size: 14px; }
@@ -832,13 +805,13 @@ html, body {
 <script>
 const API_KEY = '38eee32788cbe019ade5c13ae12af828';
 
-/* ── Guaranteed splash hide (CSS animation fallback) ── */
+/* --Guaranteed splash hide (CSS animation fallback)-- */
 setTimeout(() => {
   const sp = document.getElementById('splash');
   if(sp) sp.classList.add('hidden');
 }, 3800);
 
-/* ── Stars ── */
+/* --Stars-- */
 (function initStars(){
   const layer = document.getElementById('starsLayer');
   for(let i=0;i<100;i++){
@@ -850,7 +823,7 @@ setTimeout(() => {
   }
 })();
 
-/* ── wx bg ── */
+/* --wx bg-- */
 function makeClouds(n=5){
   const w=document.getElementById('cloudWrap'); w.innerHTML='';
   for(let i=0;i<n;i++){
@@ -899,7 +872,7 @@ function applyWx(main){
   document.getElementById('wxThunder').style.display=t.thunder?'block':'none';
 }
 
-/* ── MAP ── */
+/* --MAP-- */
 const TILES={
   osm:{url:'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',attr:'© OpenStreetMap',maxZoom:19},
   dark:{url:'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',attr:'© CARTO',maxZoom:19,sub:'abcd'},
@@ -919,25 +892,25 @@ setTileLayer('osm',document.querySelector('.map-style-btn.active'));
 map.on('click',e=>fetchByCoords(e.latlng.lat,e.latlng.lng));
 map.getContainer().style.cursor='crosshair';
 function fullExtent(){
-  /* Fly back to world view */
+  
   map.flyTo([20,10],2,{duration:1.4});
-  /* Remove active marker */
+ 
   if(activeMarker){activeMarker.remove();activeMarker=null;}
-  /* Reset sidebar to empty state */
+ 
   document.getElementById('dash').style.display='none';
   document.getElementById('emptyState').style.display='flex';
-  /* Clear search input */
+
   document.getElementById('cityInput').value='';
-  /* Reset weather background */
+ 
   makeClouds(5); stopRain(); stopSnow();
   document.getElementById('wxThunder').style.display='none';
   document.getElementById('wxSun') && (document.getElementById('wxSun').style.display='none');
-  /* Clear lastWx so peek card hides */
+
   lastWx=null;
-  /* Hide peek card on mobile */
+ 
   document.getElementById('mobPeekCard').classList.remove('visible');
   document.getElementById('peekHint').classList.remove('visible');
-  /* Close mobile sidebar if open */
+  
   if(mobOpen) closeMobileSidebar();
   toast('🌐 Map reset to full extent','ok');
 }
@@ -954,7 +927,7 @@ function placeMarker(lat,lon,temp,name){
   map.flyTo([lat,lon],Math.max(map.getZoom(),9),{duration:1.4});
 }
 
-/* ── SUGGESTIONS ── */
+/* --SUGGESTIONS-- */
 let sugTimer=null,sugActive=-1,sugItems=[];
 function onSearchInput(){
   const v=document.getElementById('cityInput').value.trim();
@@ -1000,7 +973,7 @@ function onSearchKey(e){
 }
 document.addEventListener('click',e=>{if(!$('searchBox').contains(e.target))hideSug();});
 
-/* ── CHART ── */
+/* --CHART-- */
 let fChart=null,fData=null,chartType='temp';
 function buildDataset(type){
   if(!fData) return{labels:[],data:[],color:'#7c5cfc',label:'—'};
@@ -1027,7 +1000,7 @@ function switchChart(type,btn){
   btn.classList.add('active'); renderChart(type);
 }
 
-/* ── DAILY FORECAST ── */
+/* --DAILY FORECAST-- */
 function renderDaily(list){
   const days={};
   list.forEach(i=>{const k=i.dt_txt.split(' ')[0];if(!days[k])days[k]=[];days[k].push(i);});
@@ -1047,7 +1020,7 @@ function renderDaily(list){
   });
 }
 
-/* ── API CALLS ── */
+/* --API CALLS-- */
 function searchCity(){
   const city=$('cityInput').value.trim();
   if(!city){toast('Enter a city name.','warn');return;}
@@ -1084,7 +1057,7 @@ async function fetchByCoords(lat,lon,hint){
   finally{showLoader(false);}
 }
 
-/* ── RENDER ── */
+/* --RENDER-- */
 let lastWx=null;
 function renderDash(d,fList){
   lastWx=d; fData=fList;
@@ -1094,7 +1067,7 @@ function renderDash(d,fList){
   $('emptyState').style.display='none';
   $('dash').style.display='flex';
 
-  /* Hero */
+  /* --Hero-- */
   $('hero').style.background=st.bg;
   set('hCity',d.name);
   set('hCountry',d.sys.country+' · '+d.weather[0].main.toUpperCase());
@@ -1105,7 +1078,7 @@ function renderDash(d,fList){
   set('hDesc',d.weather[0].description);
   set('hFeels','Feels like '+Math.round(d.main.feels_like)+'°C');
 
-  /* Stats */
+  /* --Stats-- */
   set('cHumidity',d.main.humidity+'%');
   set('cWind',Math.round(d.wind.speed*3.6)+' km/h');
   set('cPressure',d.main.pressure+' hPa');
@@ -1113,23 +1086,23 @@ function renderDash(d,fList){
   set('cClouds',d.clouds.all+'%');
   set('cMinMax',Math.round(d.main.temp_min)+'°/'+Math.round(d.main.temp_max)+'°');
 
-  /* Wind */
+  /* --Wind-- */
   set('wSpeed',Math.round(d.wind.speed*3.6)+' km/h ('+d.wind.speed+' m/s)');
   set('wDir',d.wind.deg+'° '+deg2dir(d.wind.deg));
   set('wGust',d.wind.gust!=null?Math.round(d.wind.gust*3.6)+' km/h':'N/A');
 
-  /* Coords */
+  /* --Coords-- */
   set('coLat',d.coord.lat.toFixed(5)+'°');
   set('coLon',d.coord.lon.toFixed(5)+'°');
   set('coCountry',d.sys.country);
 
-  /* Raw */
+  /* --Raw-- */
   $('rawBox').textContent=JSON.stringify(d,null,2);
 
-  /* Chart & daily */
+  /* --Chart & daily-- */
   if(fList.length>0){renderChart(chartType);renderDaily(fList);}
 
-  /* Update peek card — only visible on mobile */
+  /* --Update peek card — only visible on mobile-- */
   set('peekCity',d.name);
   set('peekCond',d.weather[0].description);
   set('peekEmoji',EMOJI[wxMain]||'🌡️');
@@ -1140,7 +1113,7 @@ function renderDash(d,fList){
   }
 }
 
-/* ── MOBILE SIDEBAR ── */
+/* --MOBILE SIDEBAR-- */
 let mobOpen=false;
 function openMobileSidebar(){
   mobOpen=true;
@@ -1159,14 +1132,14 @@ function closeMobileSidebar(){
 function toggleMobileSidebar(){
   if(mobOpen) closeMobileSidebar(); else openMobileSidebar();
 }
-/* swipe down */
+/* --swipe down-- */
 let touchY=0;
 $('sidebar').addEventListener('touchstart',e=>{touchY=e.touches[0].clientY;},{passive:true});
 $('sidebar').addEventListener('touchend',e=>{
   if(e.changedTouches[0].clientY-touchY>55) closeMobileSidebar();
 },{passive:true});
 
-/* ── HISTORY ── */
+/* --HISTORY-- */
 let hist=[];
 function addHist(city){
   hist=hist.filter(c=>c.toLowerCase()!==city.toLowerCase());
@@ -1175,7 +1148,7 @@ function addHist(city){
   hist.forEach(c=>{const t=document.createElement('div');t.className='hist-tag';t.textContent=c;t.onclick=()=>{$('cityInput').value=c;searchCity();};row.appendChild(t);});
 }
 
-/* ── HELPERS ── */
+/* --HELPERS-- */
 const EMOJI={Clear:'☀️',Clouds:'☁️',Rain:'🌧️',Drizzle:'🌦️',Thunderstorm:'⛈️',Snow:'❄️',Mist:'🌫️',Smoke:'🌫️',Haze:'🌫️',Dust:'🌪️',Fog:'🌫️',Tornado:'🌪️',Squall:'💨'};
 function tempStyle(t){
   if(t< 0) return{color:'#3b82f6',label:'❄ FREEZING',bg:'linear-gradient(135deg,rgba(14,30,80,0.9),rgba(29,78,216,0.85))'};
