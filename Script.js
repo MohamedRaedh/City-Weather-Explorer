@@ -1,16 +1,12 @@
 const API_KEY = '38eee32788cbe019ade5c13ae12af828';
 
-/* ═══════════════════════════════════════
-   SPLASH HIDE (CSS animation fallback)
-═══════════════════════════════════════ */
+/* --SPLASH HIDE (CSS animation fallback)-- */
 setTimeout(() => {
   const sp = document.getElementById('splash');
   if (sp) sp.classList.add('hidden');
 }, 3800);
 
-/* ═══════════════════════════════════════
-   STARS
-═══════════════════════════════════════ */
+/* --STARS-- */
 (function initStars() {
   const layer = document.getElementById('starsLayer');
   for (let i = 0; i < 100; i++) {
@@ -22,9 +18,7 @@ setTimeout(() => {
   }
 })();
 
-/* ═══════════════════════════════════════
-   WEATHER BACKGROUND EFFECTS
-═══════════════════════════════════════ */
+/* --WEATHER BACKGROUND EFFECTS-- */
 function makeClouds(n = 5) {
   const w = document.getElementById('cloudWrap');
   w.innerHTML = '';
@@ -74,7 +68,7 @@ function stopSnow() {
   document.getElementById('snowWrap').style.display = 'none';
 }
 
-/* Weather condition → effect lookup table */
+/* --Weather condition → effect lookup table-- */
 const WX = {
   Clear:        { clouds: 2,  rain: false, snow: false, thunder: false },
   Clouds:       { clouds: 9,  rain: false, snow: false, thunder: false },
@@ -94,9 +88,7 @@ function applyWx(main) {
   document.getElementById('wxThunder').style.display = t.thunder ? 'block' : 'none';
 }
 
-/* ═══════════════════════════════════════
-   LEAFLET MAP SETUP
-═══════════════════════════════════════ */
+/* --LEAFLET MAP SETUP--*/
 const TILES = {
   osm:       { url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',                                                          attr: '© OpenStreetMap', maxZoom: 19 },
   dark:      { url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',                                               attr: '© CARTO',         maxZoom: 19, sub: 'abcd' },
@@ -134,9 +126,7 @@ function fullExtent() {
   toast('🌐 Map reset to full extent', 'ok');
 }
 
-/* ═══════════════════════════════════════
-   MAP MARKER
-═══════════════════════════════════════ */
+/* --MAP MARKER-- */
 let activeMarker = null;
 
 function placeMarker(lat, lon, temp, name) {
@@ -151,9 +141,7 @@ function placeMarker(lat, lon, temp, name) {
   map.flyTo([lat, lon], Math.max(map.getZoom(), 9), { duration: 1.4 });
 }
 
-/* ═══════════════════════════════════════
-   SEARCH AUTOCOMPLETE
-═══════════════════════════════════════ */
+/* --SEARCH AUTOCOMPLETE-- */
 let sugTimer = null, sugActive = -1, sugItems = [];
 
 function onSearchInput() {
@@ -227,9 +215,7 @@ document.addEventListener('click', e => {
   if (!$('searchBox').contains(e.target)) hideSug();
 });
 
-/* ═══════════════════════════════════════
-   CHART (Chart.js)
-═══════════════════════════════════════ */
+/* --CHART (Chart.js)-- */
 let fChart = null, fData = null, chartType = 'temp';
 
 function buildDataset(type) {
@@ -299,9 +285,7 @@ function switchChart(type, btn) {
   renderChart(type);
 }
 
-/* ═══════════════════════════════════════
-   5-DAY FORECAST RENDERER
-═══════════════════════════════════════ */
+/* --5-DAY FORECAST RENDERER-- */
 function renderDaily(list) {
   const days = {};
   list.forEach(i => {
@@ -327,9 +311,7 @@ function renderDaily(list) {
   });
 }
 
-/* ═══════════════════════════════════════
-   API CALLS
-═══════════════════════════════════════ */
+/* --API CALLS-- */
 function searchCity() {
   const city = $('cityInput').value.trim();
   if (!city) { toast('Enter a city name.', 'warn'); return; }
@@ -379,9 +361,7 @@ async function fetchByCoords(lat, lon, hint) {
   }
 }
 
-/* ═══════════════════════════════════════
-   DASHBOARD RENDERER
-═══════════════════════════════════════ */
+/* --DASHBOARD RENDERER-- */
 let lastWx = null;
 
 function renderDash(d, fList) {
@@ -392,7 +372,7 @@ function renderDash(d, fList) {
   $('emptyState').style.display = 'none';
   $('dash').style.display = 'flex';
 
-  /* Hero card */
+  /* --Hero card-- */
   $('hero').style.background = st.bg;
   set('hCity',    d.name);
   set('hCountry', d.sys.country + ' · ' + d.weather[0].main.toUpperCase());
@@ -403,7 +383,7 @@ function renderDash(d, fList) {
   set('hDesc',    d.weather[0].description);
   set('hFeels',   'Feels like ' + Math.round(d.main.feels_like) + '°C');
 
-  /* Stats */
+  /* --Stats-- */
   set('cHumidity', d.main.humidity + '%');
   set('cWind',     Math.round(d.wind.speed * 3.6) + ' km/h');
   set('cPressure', d.main.pressure + ' hPa');
@@ -411,23 +391,23 @@ function renderDash(d, fList) {
   set('cClouds',   d.clouds.all + '%');
   set('cMinMax',   Math.round(d.main.temp_min) + '°/' + Math.round(d.main.temp_max) + '°');
 
-  /* Wind */
+  /* --Wind-- */
   set('wSpeed', Math.round(d.wind.speed * 3.6) + ' km/h (' + d.wind.speed + ' m/s)');
   set('wDir',   d.wind.deg + '° ' + deg2dir(d.wind.deg));
   set('wGust',  d.wind.gust != null ? Math.round(d.wind.gust * 3.6) + ' km/h' : 'N/A');
 
-  /* Coordinates */
+  /* --Coordinates-- */
   set('coLat',     d.coord.lat.toFixed(5) + '°');
   set('coLon',     d.coord.lon.toFixed(5) + '°');
   set('coCountry', d.sys.country);
 
-  /* Raw JSON */
+  /* --Raw JSON-- */
   $('rawBox').textContent = JSON.stringify(d, null, 2);
 
-  /* Chart & daily forecast */
+  /* --Chart & daily forecast-- */
   if (fList.length > 0) { renderChart(chartType); renderDaily(fList); }
 
-  /* Mobile peek card */
+  /* --Mobile peek card-- */
   set('peekCity', d.name);
   set('peekCond', d.weather[0].description);
   set('peekEmoji', EMOJI[wxMain] || '🌡️');
@@ -438,9 +418,7 @@ function renderDash(d, fList) {
   }
 }
 
-/* ═══════════════════════════════════════
-   MOBILE SIDEBAR (BOTTOM SHEET)
-═══════════════════════════════════════ */
+/* --MOBILE SIDEBAR (BOTTOM SHEET)-- */
 let mobOpen = false;
 
 function openMobileSidebar() {
@@ -463,14 +441,12 @@ function toggleMobileSidebar() {
   if (mobOpen) closeMobileSidebar(); else openMobileSidebar();
 }
 
-/* Swipe down to close */
+/* --Swipe down to close-- */
 let touchY = 0;
 $('sidebar').addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, { passive: true });
 $('sidebar').addEventListener('touchend',   e => { if (e.changedTouches[0].clientY - touchY > 55) closeMobileSidebar(); }, { passive: true });
 
-/* ═══════════════════════════════════════
-   SEARCH HISTORY
-═══════════════════════════════════════ */
+/* --SEARCH HISTORY-- */
 let hist = [];
 
 function addHist(city) {
@@ -488,18 +464,16 @@ function addHist(city) {
   });
 }
 
-/* ═══════════════════════════════════════
-   UTILITY HELPERS
-═══════════════════════════════════════ */
+/* --UTILITY HELPERS-- */
 
-/* Weather condition → emoji */
+/* --Weather condition → emoji-- */
 const EMOJI = {
   Clear: '☀️', Clouds: '☁️', Rain: '🌧️', Drizzle: '🌦️',
   Thunderstorm: '⛈️', Snow: '❄️', Mist: '🌫️', Smoke: '🌫️',
   Haze: '🌫️', Dust: '🌪️', Fog: '🌫️', Tornado: '🌪️', Squall: '💨'
 };
 
-/* Temperature → colour, label, hero gradient */
+/* --Temperature → colour, label, hero gradient-- */
 function tempStyle(t) {
   if (t <  0) return { color: '#3b82f6', label: '❄ FREEZING', bg: 'linear-gradient(135deg,rgba(14,30,80,0.9),rgba(29,78,216,0.85))' };
   if (t < 10) return { color: '#60a5fa', label: '🥶 COLD',    bg: 'linear-gradient(135deg,rgba(14,30,80,0.9),rgba(37,99,235,0.85))' };
@@ -508,26 +482,26 @@ function tempStyle(t) {
   return             { color: '#ef4444', label: '🔥 HOT',      bg: 'linear-gradient(135deg,rgba(31,4,4,0.9),rgba(220,38,38,0.85))' };
 }
 
-/* UTC offset → local time string */
+/* --UTC offset → local time string-- */
 function localTime(unix, tz) {
   const d = new Date((unix + tz) * 1000);
   return String(d.getUTCHours()).padStart(2, '0') + ':' + String(d.getUTCMinutes()).padStart(2, '0');
 }
 
-/* Wind degrees → compass direction */
+/* --Wind degrees → compass direction-- */
 function deg2dir(d) {
   return ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(d / 22.5) % 16];
 }
 
-/* DOM shorthand */
+/* --DOM shorthand-- */
 function $(id)       { return document.getElementById(id); }
 function set(id, v)  { const e = $(id); if (e) e.textContent = v; }
 
-/* Loader */
+/* --Loader-- */
 function showLoader(v)  { $('loader').classList.toggle('show', v); }
 function loaderTxt(t)   { $('loaderTxt').textContent = t; }
 
-/* Toast notification */
+/* --Toast notification-- */
 function toast(msg, type = 'error') {
   const t = $('toast');
   t.textContent = msg;
@@ -536,7 +510,7 @@ function toast(msg, type = 'error') {
   t._t = setTimeout(() => t.classList.remove('show'), 3200);
 }
 
-/* Raw JSON toggle */
+/* --Raw JSON toggle-- */
 let rawOpen = false;
 function toggleRaw() {
   rawOpen = !rawOpen;
